@@ -10,4 +10,10 @@ class Users_model extends CI_Model
         $this->db->where($where);
         return $this->db->get($this->table);
     }
+
+    public function insert_data($data)
+    {
+        $this->db->insert($this->table);
+        return $this->db->affected_rows();
+    }
 }
