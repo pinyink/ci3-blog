@@ -341,53 +341,51 @@
 								<!-- /.tab-pane -->
 
 								<div class="tab-pane" id="settings">
-									<form class="form-horizontal">
+									<form class="form-horizontal" id="formSetting">
 										<div class="form-group row">
 											<label for="inputName" class="col-sm-2 col-form-label">Name</label>
 											<div class="col-sm-10">
-												<input type="email" class="form-control" id="inputName"
+												<input type="text" class="form-control" id="inputName" name="inputName"
 													placeholder="Name">
 											</div>
 										</div>
 										<div class="form-group row">
 											<label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
 											<div class="col-sm-10">
-												<input type="email" class="form-control" id="inputEmail"
+												<input type="email" class="form-control" id="inputEmail" name="inputEmail"
 													placeholder="Email">
 											</div>
 										</div>
 										<div class="form-group row">
-											<label for="inputName2" class="col-sm-2 col-form-label">Name</label>
+											<label for="inputEducation" class="col-sm-2 col-form-label">Education</label>
 											<div class="col-sm-10">
-												<input type="text" class="form-control" id="inputName2"
-													placeholder="Name">
+												<input type="text" class="form-control" id="inputEducation" name="inputEducation"
+													placeholder="Education">
+											</div>
+										</div>
+										<div class="form-group row">
+											<label for="inputLocation" class="col-sm-2 col-form-label">Location</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" id="inputLocation" name="inputLocation"
+													placeholder="Location">
+											</div>
+										</div>
+										<div class="form-group row">
+											<label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" id="inputSkills" name="inputSkills"
+													placeholder="Skills">
 											</div>
 										</div>
 										<div class="form-group row">
 											<label for="inputExperience"
 												class="col-sm-2 col-form-label">Experience</label>
 											<div class="col-sm-10">
-												<textarea class="form-control" id="inputExperience"
+												<textarea class="form-control" id="inputExperience" name="inputExperience"
 													placeholder="Experience"></textarea>
 											</div>
 										</div>
-										<div class="form-group row">
-											<label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
-											<div class="col-sm-10">
-												<input type="text" class="form-control" id="inputSkills"
-													placeholder="Skills">
-											</div>
-										</div>
-										<div class="form-group row">
-											<div class="offset-sm-2 col-sm-10">
-												<div class="checkbox">
-													<label>
-														<input type="checkbox"> I agree to the <a href="#">terms and
-															conditions</a>
-													</label>
-												</div>
-											</div>
-										</div>
+										
 										<div class="form-group row">
 											<div class="offset-sm-2 col-sm-10">
 												<button type="submit" class="btn btn-danger">Submit</button>

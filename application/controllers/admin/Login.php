@@ -36,6 +36,7 @@ class Login extends CI_Controller
             if (password_verify($password, $query_row->user_password)) {
                 if ($query_row->user_active == 'active') {
                     $session_data = [
+                        'user_id' => $query_row->user_id,
                         'username' => $username
                     ];
                     $this->session->set_userdata($session_data);
