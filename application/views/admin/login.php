@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Log in (v2)</title>
+    <title>Log in</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -19,7 +19,6 @@
 
 <body class="hold-transition login-page">
     <div class="login-box">
-		<?=$this->session->flashdata('login_message');?>
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
@@ -82,6 +81,8 @@
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
+		<br>
+		<?=$this->session->flashdata('login_message');?>
     </div>
     <!-- /.login-box -->
 

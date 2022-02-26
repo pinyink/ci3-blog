@@ -13,6 +13,7 @@ class Login extends CI_Controller
     public function index()
     {
         method('GET');
+        $this->session->sess_destroy();
         $this->load->view('admin/login');
     }
 
@@ -63,6 +64,16 @@ class Login extends CI_Controller
 			</div>');
             redirect('auth/login', 'refresh');
         }
+    }
+
+    public function logout()
+    {
+        $this->session->set_flashdata('login_message', '<div class="alert alert-success alert-dismissible">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<h5><i class="icon fas fa-user-check"></i> Alert!</h5>
+				Logout Success
+			</div>');
+        redirect('auth/login', 'refresh');
     }
 
     public function coba()

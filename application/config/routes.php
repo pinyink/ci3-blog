@@ -55,3 +55,4 @@ $route['translate_uri_dashes'] = false;
 
 $route['auth/login']['GET'] = 'admin/login/index';
 $route['auth/verify']['POST'] = 'admin/login/verify';
+$route['auth/logout']['GET'] = 'admin/login/logout';
