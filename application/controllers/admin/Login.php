@@ -7,6 +7,7 @@ class Login extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Users_model');
+        $this->load->model('Profils_model');
         $this->load->library('form_validation');
     }
 
@@ -37,8 +38,16 @@ class Login extends CI_Controller
                 if ($query_row->user_active == 'active') {
                     $session_data = [
                         'user_id' => $query_row->user_id,
-                        'username' => $username
+                        'username' => $username,
+                        'user_image' => base_url().'assets/dist/img/avatar5.png'
                     ];
+                    $query_profil = $this->Profils_model->read_data(['a.profil_user_id' => $query_row->user_id]);
+                    if ($query->num_rows() >= 1) {
+                        $query_profil_row = $query_profil->row();
+                        if ($query_profil_row->profil_image != '') {
+                            $session_data['user_image'] = base_url().$query_profil_row->profil_image;
+                        }
+                    }
                     $this->session->set_userdata($session_data);
                     redirect('admin/dashboard', 'location');
                 } else {
