@@ -9,6 +9,46 @@ function modal_file() {
 	$('#modal-file .modal-title').text('List Files');
 }
 
+function get_file(offset = null, callback = function(){}) {
+	$.ajax({
+		type: "GET",
+		url: baseUrl + "admin/file/get_data/12/"+offset,
+		dataType: "JSON",
+		success: function (response) {
+			console.log(response);
+			var html = '';
+			$.each(response.data, function (indexInArray, valueOfElement) { 
+				html += '<div class="col-md-3 col-sm-6 col-xs-6">'+
+										'<div class="card">'+
+											'<img class="card-img-top" style="height: 200px;" src="'+baseUrl+valueOfElement.file_path+'" alt="Card image cap">'+
+											'<div class="card-body">'+
+												'<p class="card-text">'+valueOfElement.file_desc+'</p>'+
+												'<a href="javascript:;" class="card-link btn btn-default btn-sm"><i class="fa fa-edit"></i> Edit</a>'+
+											'</div>'+
+										'</div>'+
+									'</div>';
+			});
+			$('#div_file').html(html);
+
+			$('.pagination').pagination({
+				items: response.num_rows,
+				itemsOnPage: 12,
+				cssStyle: 'light-theme',
+				currentPage: offset,
+				onPageClick: function (e) {
+					get_file(e);
+				},
+			});
+
+			callback();
+		}
+	});
+}
+
+$(function () {
+	get_file();
+});
+
 // DropzoneJS Demo Code Start
 Dropzone.autoDiscover = false
 
@@ -19,45 +59,55 @@ var previewTemplate = previewNode.parentNode.innerHTML
 previewNode.parentNode.removeChild(previewNode)
 
 var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
-  url: "/target-url", // Set the url
-  thumbnailWidth: 80,
-  thumbnailHeight: 80,
-  parallelUploads: 20,
-  previewTemplate: previewTemplate,
-  autoQueue: false, // Make sure the files aren't queued until manually added
-  previewsContainer: "#previews", // Define the container to display the previews
-  clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+	url: baseUrl + "admin/file/add_data", // Set the url
+	thumbnailWidth: 80,
+	thumbnailHeight: 80,
+	parallelUploads: 20,
+	previewTemplate: previewTemplate,
+	autoQueue: false, // Make sure the files aren't queued until manually added
+	previewsContainer: "#previews", // Define the container to display the previews
+	clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
 })
 
-myDropzone.on("addedfile", function(file) {
-  // Hookup the start button
-  file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file) }
+myDropzone.on("addedfile", function (file) {
+	// Hookup the start button
+	file.previewElement.querySelector(".start").onclick = function () {
+		myDropzone.enqueueFile(file)
+	}
 })
 
 // Update the total progress bar
-myDropzone.on("totaluploadprogress", function(progress) {
-  document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
+myDropzone.on("totaluploadprogress", function (progress) {
+	document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
 })
 
-myDropzone.on("sending", function(file) {
-  // Show the total progress bar when upload starts
-  document.querySelector("#total-progress").style.opacity = "1"
-  // And disable the start button
-  file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
+myDropzone.on("sending", function (file) {
+	// Show the total progress bar when upload starts
+	document.querySelector("#total-progress").style.opacity = "1"
+	// And disable the start button
+	file.previewElement.querySelector(".start").setAttribute("disabled", "disabled");
+	file.previewElement.querySelector(".delete").setAttribute("disabled", "disabled");
+	file.previewElement.querySelector(".cancel").setAttribute("disabled", "disabled");
 })
 
 // Hide the total progress bar when nothing's uploading anymore
-myDropzone.on("queuecomplete", function(progress) {
-  document.querySelector("#total-progress").style.opacity = "0"
+myDropzone.on("queuecomplete", function (progress) {
+	document.querySelector("#total-progress").style.opacity = "0";
+	get_file();
 })
+
+myDropzone.on('error', function (file, response) {
+	$(file.previewElement).find('.dz-error-message').text(response);
+	console.log(response);
+});
 
 // Setup the buttons for all transfers
 // The "add files" button doesn't need to be setup because the config
 // `clickable` has already been specified.
-document.querySelector("#actions .start").onclick = function() {
-  myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
+document.querySelector("#actions .start").onclick = function () {
+	myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
 }
-document.querySelector("#actions .cancel").onclick = function() {
-  myDropzone.removeAllFiles(true)
+document.querySelector("#actions .cancel").onclick = function () {
+	myDropzone.removeAllFiles(true)
 }
 // DropzoneJS Demo Code End

@@ -25,6 +25,9 @@ class Blog extends CI_Controller
 
         $this->template->css('assets/plugins/dropzone/min/dropzone.min.css');
         $this->template->js('assets/plugins/dropzone/min/dropzone.min.js');
+
+        $this->template->css('assets/plugins/jquery-simplePagination/simplePagination.css');
+        $this->template->js('assets/plugins/jquery-simplePagination/jquery.simplePagination.js');
         
         $this->template->js('assets/js/admin/blog/input.js');
         $this->template->admin('admin/blog/input');
