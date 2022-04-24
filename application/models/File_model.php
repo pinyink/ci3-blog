@@ -29,7 +29,7 @@ class File_model extends CI_Model
     public function update_data($id, $data)
     {
         $this->db->where(['file_id' => $id]);
-        $this->db->update($this->table);
+        $this->db->update($this->table, $data);
         return $this->db->affected_rows();
     }
 }

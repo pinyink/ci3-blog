@@ -7,7 +7,7 @@ class Profil extends CI_Controller
     {
         parent::__construct();
         $this->load->library('template');
-        $this->load->model('Profils_model');
+        $this->load->model(['Profils_model', 'Users_model']);
     }
 
     private function init()
@@ -106,6 +106,39 @@ class Profil extends CI_Controller
 
         $log['errorMessage'] .= PHP_EOL.$message;
 
+        $this->output->set_content_type('application/json')->set_output(json_encode($log));
+    }
+
+    public function save_password()
+    {
+        auth_method('POST', true);
+        // password_hash($password, PASSWORD_BCRYPT);
+        $oldPassword = $this->input->post('oldPassword');
+        $newPassword = $this->input->post('newPassword');
+        $rePassword = $this->input->post('rePassword');
+        if ($newPassword != $rePassword) {
+            $log = [
+                'errorCode' => 2,
+                'errorMessage' => 'Password Baru Tidak Sama'
+            ];
+        } else {
+            $query_cek = $this->Users_model->read_data(['user_id' => $this->session->userdata('user_id')])->row();
+            if (password_verify($oldPassword, $query_cek->user_password)) {
+                $data_update = [
+                    'user_password' => password_hash($newPassword, PASSWORD_BCRYPT)
+                ];
+                $this->Users_model->update_data($this->session->userdata('user_id'), $data_update);
+                $log = [
+                    'errorCode' => 1,
+                    'errorMessage' => 'Password Berhasil Di Update'
+                ];
+            } else {
+                $log = [
+                    'errorCode' => 2,
+                    'errorMessage' => 'Password Lama Tidak Sama'
+                ];
+            }
+        }
         $this->output->set_content_type('application/json')->set_output(json_encode($log));
     }
 }

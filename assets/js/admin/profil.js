@@ -60,3 +60,22 @@ $('#formSetting').on('submit', function(e){
 		}
 	});
 });
+
+$('#formPassword').on('submit', function(e){
+	e.preventDefault();
+	div_overlay('password');
+	$.ajax({
+		type: "POST",
+		url: baseUrl+'admin/profil/save_password',
+		data: submit_form_data('#formPassword'),
+		dataType: "JSON",
+		success: function (response) {
+			notify_toast(response);
+			div_overlay_close('password');
+			$('#formPassword')[0].reset();
+		},
+		error: function(jqXHR){
+			console.log(jqXHR.responseText);
+		}
+	});
+});

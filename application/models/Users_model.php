@@ -13,7 +13,14 @@ class Users_model extends CI_Model
 
     public function insert_data($data)
     {
-        $this->db->insert($this->table);
+        $this->db->insert($this->table, $data);
+        return $this->db->affected_rows();
+    }
+
+    public function update_data($id, $data)
+    {
+        $this->db->where('user_id', $id);
+        $this->db->update($this->table, $data);
         return $this->db->affected_rows();
     }
 }

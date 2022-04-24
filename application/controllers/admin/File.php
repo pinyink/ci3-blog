@@ -54,4 +54,35 @@ class File extends CI_Controller
         ];
         $this->output->set_content_type('application/json')->set_output(json_encode($data));
     }
+
+    public function get_detail($id)
+    {
+        auth_method('GET');
+        $query = $this->File_model->read_data(['file_id' => $id])->row();
+        $this->output->set_content_type('application/json')->set_output(json_encode($query));
+    }
+
+    public function update()
+    {
+        auth_method('POST');
+        $file_id = $this->input->post('file_id');
+        $file_desc = $this->input->post('file_desc');
+        $data_update = [
+            'file_desc' => $file_desc
+        ];
+        $query_update = $this->File_model->update_data($file_id, $data_update);
+        if ($query_update >= 1) {
+            $log = [
+                'errorCode' => 1,
+                'errorMessage' => 'Update Data Success'
+            ];
+        } else {
+            $log = [
+                'errorCode' => 2,
+                'errorMessage' => 'Nothing Update'
+            ];
+        }
+
+        $this->output->set_content_type('application/json')->set_output(json_encode($log));
+    }
 }

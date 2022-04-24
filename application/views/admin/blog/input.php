@@ -30,23 +30,35 @@
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
-						<form action="">
+						<?=form_open('', ['id' => 'form_blog']);?>
+							<img src="<?=base_url();?>assets/dist/img/boxed-bg.png" style="width: 100%; height: 120px" id="img-desc" class="img img-fluid" alt="">
 							<div class="form-group">
-								<label for="inputJudul">Judul</label>
-								<input type="text" class="form-control" id="inputJudul" placeholder="Judul Post"
-									name="inputJudul">
+								<label for="blog_title">Image</label> <span id="span-image" class=""></span>
+								<input type="text" class="form-control" id="blog_image" placeholder="Url"
+									name="blog_image">
 							</div>
 							<div class="form-group">
-								<label for="inputDeskripsi">Deskripsi</label>
-								<textarea type="text" class="form-control" id="inputDeskripsi" name="inputDeskripsi"
+								<label for="blog_title">Url</label> <span id="span-url" class=""></span>
+								<input type="text" class="form-control" id="blog_url" placeholder="Url"
+									name="blog_url" readonly>
+							</div>
+							<div class="form-group">
+								<label for="blog_title">Judul</label>
+								<input type="text" class="form-control" id="blog_title" placeholder="Judul Post"
+									name="blog_title">
+							</div>
+							<div class="form-group">
+								<label for="blog_desc">Deskripsi</label>
+								<textarea type="text" class="form-control" id="blog_desc" name="blog_desc"
 									placeholder="Deskripsi"></textarea>
 							</div>
 							<div class="pb-2">
 								<button type="button" class="btn btn-default btn-sm" onclick="modal_file()"><i
 										class="fa fa-file"></i> File</button>
 							</div>
-							<textarea id="summernote"></textarea>
-						</form>
+							<textarea id="summernote" name="blog_text"></textarea>
+							<?=form_submit(['class' => 'btn btn-primary'], 'Simpan')?>
+						<?=form_close();?>
 					</div>
 					<div class="card-footer">
 					</div>
@@ -84,6 +96,11 @@
 										<a class="nav-link" id="custom-tabs-three-file-tab" data-toggle="pill"
 											href="#custom-tabs-three-file" role="tab"
 											aria-controls="custom-tabs-three-file" aria-selected="false">File</a>
+									</li>
+									<li class="nav-item">
+										<a class="nav-link" id="custom-tabs-detail-file-tab" data-toggle="pill"
+											href="#custom-tabs-detail-file" role="tab"
+											aria-controls="custom-tabs-detail-file" aria-selected="false">Detail File</a>
 									</li>
 								</ul>
 							</div>
@@ -166,6 +183,27 @@
 										</div>
 										<div class="pagination"></div>
 									</div>
+									<div class="tab-pane fade" id="custom-tabs-detail-file" role="tabpanel"
+										aria-labelledby="custom-tabs-detail-file-tab">
+										<div class="row">
+											<div class="col-md-4">
+												<img src="<?=base_url().'assets/dist/img/avatar5.png';?>" alt="" id="img-file" class="img img-rounded" style="height: 260px; width: 100%">
+											</div>
+											<div class="col-md-8">
+												<?=form_open('', ['id' => 'form_edit_file', 'class' => 'form-horizontal'], ['file_id' => '']);?>
+												<div class="form-group">
+													<label for="file_desc">File Desc</label>
+													<?=form_input(['name' => 'file_desc', 'class'=>'form-control']);?>
+												</div>
+												<div class="form-group">
+													<label for="file_path">File Path</label>
+													<?=form_input(['name' => 'file_path', 'class'=>'form-control']);?>
+												</div>
+												<?=form_submit(['class' => 'btn btn-primary'], 'Simpan')?>
+												<?=form_close() ;?>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 							<!-- /.card -->
@@ -173,8 +211,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="modal-footer justify-content-between">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 		<!-- /.modal-content -->

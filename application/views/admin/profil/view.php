@@ -84,6 +84,8 @@
 								</li>
 								<li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a>
 								</li>
+								<li class="nav-item"><a class="nav-link" href="#password" data-toggle="tab">Password</a>
+								</li>
 							</ul>
 						</div><!-- /.card-header -->
 						<div class="card-body">
@@ -162,7 +164,42 @@
 
 											<div class="form-group row">
 												<div class="offset-sm-2 col-sm-10">
-													<button type="submit" class="btn btn-danger">Submit</button>
+													<button type="submit" class="btn btn-primary">Submit</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+								<!-- /.tab-pane -->
+
+								<div class="tab-pane" id="password">
+									<div id="div_password">
+										<form class="form-horizontal" id="formPassword">
+											<div class="form-group row">
+												<label for="oldPassword" class="col-sm-2 col-form-label">Old Password</label>
+												<div class="col-sm-10">
+													<input type="password" class="form-control" id="oldPassword"
+														name="oldPassword" placeholder="Old Password">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="newPassword" class="col-sm-2 col-form-label">New Password</label>
+												<div class="col-sm-10">
+													<input type="password" class="form-control" id="newPassword"
+														name="newPassword" placeholder="New Password">
+												</div>
+											</div>
+											<div class="form-group row">
+												<label for="rePassword" class="col-sm-2 col-form-label">Retype Password</label>
+												<div class="col-sm-10">
+													<input type="password" class="form-control" id="rePassword"
+														name="rePassword" placeholder="Retype Password">
+												</div>
+											</div>
+
+											<div class="form-group row">
+												<div class="offset-sm-2 col-sm-10">
+													<button type="submit" class="btn btn-primary">Submit</button>
 												</div>
 											</div>
 										</form>
