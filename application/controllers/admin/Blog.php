@@ -20,6 +20,7 @@ class Blog extends CI_Controller
 
     public function index()
     {
+        auth_method('GET');
         self::init();
         $this->template->datatables();
         $this->template->js('assets/js/admin/blog/view.js');
@@ -28,6 +29,7 @@ class Blog extends CI_Controller
 
     public function ajax_list()
     {
+        auth_method('POST');
         $List = $this->Blog_model->get_datatables();
         $data = array();
         $no   = $_POST['start'];
@@ -120,6 +122,7 @@ class Blog extends CI_Controller
 
     public function edit($id)
     {
+        auth_method('GET');
         $query_cek = $this->Blog_model->read_data(['blog_url' => $id]);
         if ($query_cek->num_rows() >= 1) {
             $data = [

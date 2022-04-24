@@ -27,6 +27,9 @@
 						<h3 class="card-title">
 							Post
 						</h3>
+						<div class="card-tools">
+							<a href="<?=base_url();?>admin/blog/input" class="btn btn-primary"><i class="fa fa-plus"></i> Buat Post</a>
+						</div>
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">

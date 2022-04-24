@@ -41,7 +41,15 @@
 					<a href="<?=base_url('admin/blog');?>" class="nav-link">
 						<i class="nav-icon fas fa-th"></i>
 						<p>
-							Blog
+							Blogs
+						</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="<?=base_url('admin/user');?>" class="nav-link">
+						<i class="nav-icon fas fa-user"></i>
+						<p>
+							Users
 						</p>
 					</a>
 				</li>

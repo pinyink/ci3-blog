@@ -16,7 +16,7 @@ class Blog extends CI_Controller
         $page = !empty($this->input->get('page')) ? $this->input->get('page') - 1: 0;
         $per_page = 6;
         $offset = $page * $per_page;
-        $search = !empty($this->input->get('search')) ? str_replace('-', ' ', $this->input->get('search')): null;
+        $search = !empty($this->input->get('search')) ? str_replace('+', ' ', $this->input->get('search')): null;
         $data['blog'] = $this->Blog_model->read_data_short(['blog_publish' => 'Y'], $per_page, $offset, $search)->result();
         $count = $this->Blog_model->read_count(['blog_publish' => 'Y'], $search)->row();
         $data['count'] = $count->total;
@@ -53,6 +53,9 @@ class Blog extends CI_Controller
 
     public function detail($any)
     {
-        echo $any;
+        $data = [
+            'data' => $this->Blog_model->read_data(['blog_url' => $any])->row()
+        ];
+        $this->template->front('front/detail', $data);
     }
 }
